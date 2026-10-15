@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        preset: [ci-gcc, ci-clang, ci-gcc-asan, ci-clang-asan]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install compilers and Ninja
+        run: sudo apt-get update && sudo apt-get install -y ninja-build g++ clang libclang-rt-dev
+      - name: Configure
+        run: cmake --preset ${{ matrix.preset }}
+      - name: Build
+        run: cmake --build --preset ${{ matrix.preset }}
+      - name: Test
+        run: ctest --preset ${{ matrix.preset }} --output-on-failure

@@ -1,0 +1,10 @@
+BasedOnStyle: Google
+Language: Cpp
+ColumnLimit: 100
+IndentWidth: 2
+PointerAlignment: Left
+SortIncludes: true
+IncludeBlocks: Regroup
+AllowShortFunctionsOnASingleLine: Inline
+DerivePointerAlignment: false
+SpaceAfterCStyleCast: false
